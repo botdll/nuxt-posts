@@ -16,6 +16,7 @@
                 :key="post._id" 
                 :title="post.title"
                 :subtitle="post.subtitle"
+                :date="post.createdAt"
                 />
               </div>
               <!-- end of post -->
@@ -41,8 +42,8 @@ import PostItem from '@/components/PostItem'
       return {
         title: 'My title from page',
         posts: [
-          {_id: '1', title: 'My first post', subtitle: 'My first subtitle'},
-          {_id: '2', title: 'My second post', subtitle: 'My second subtitle'}
+          {_id: '1', title: 'My first post', subtitle: 'My first subtitle', createdAt: new Date()},
+          {_id: '2', title: 'My second post', subtitle: 'My second subtitle', createdAt : new Date()}
         ]
       }
     }
