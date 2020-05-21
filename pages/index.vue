@@ -11,13 +11,11 @@
                   <h1>Newest Posts</h1>
                   <hr>
                 </div>
-                <PostItem 
-                :title="title"
-                :subtitle="'new sub'"
-                />
-                <PostItem 
-                :title="'New post title 2'"
-                :subtitle="'new sub 2'"
+                <PostItem
+                v-for=" post in posts"
+                :key="post._id" 
+                :title="post.title"
+                :subtitle="post.subtitle"
                 />
               </div>
               <!-- end of post -->
@@ -41,7 +39,11 @@ import PostItem from '@/components/PostItem'
     },
     data() {
       return {
-        title: 'My title from page'
+        title: 'My title from page',
+        posts: [
+          {_id: '1', title: 'My first post', subtitle: 'My first subtitle'},
+          {_id: '2', title: 'My second post', subtitle: 'My second subtitle'}
+        ]
       }
     }
   }
