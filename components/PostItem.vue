@@ -5,7 +5,7 @@
         <h5 class="subtitle is-5">{{ subtitle }}</h5>
         </a>
         <div class="post-content">
-        by Filip Jerga, {{ formatDate(date) }}
+        by Filip Jerga, {{ date | formatDate }}
         </div>
     </div>
 </template>
@@ -35,9 +35,7 @@ import moment from 'moment'
             }
         },
         methods: {
-            formatDate(date) {
-                return moment(date).format('LL')
-            }
+
         }
     }
 </script>
