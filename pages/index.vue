@@ -51,17 +51,5 @@ import PostItem from '@/components/PostItem'
 </script>
 
 <style scoped>
-  .post-content {
-    font-style: italic;
-  }
 
-  .post {
-    margin-bottom: 20px;
-    padding: 5px;
-    border-bottom: 2px solid transparent;
-  }
-
-  .post:hover {
-    border-bottom: 2px solid #e8e8e8;
-  }
 </style>
