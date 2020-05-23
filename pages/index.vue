@@ -26,6 +26,11 @@
           </div>
         </div>
       </div>
+      <!-- <form>
+        <input type="text" v-model="form.title">
+        <input type="text" v-model="form.subtitle">
+      </form>
+      {{isFormValid}} -->
     </div>
   </div>
 </template>
@@ -42,7 +47,23 @@ import PostItem from '@/components/PostItem'
     data() {
       return {
         title: 'My title from page',
-        posts: this.$store.state.posts
+        form: {
+          title: 'some title',
+          subtitle: 'some subtitle'
+        }
+      }
+    },
+    computed: {
+      posts() {
+        return this.$store.state.posts
+      },
+      isFormValid() {
+        console.log('isFormValid has been called')
+        if (this.form.title) {
+          return true
+        }
+
+        return false
       }
     }
   }

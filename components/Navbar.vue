@@ -5,7 +5,9 @@
                 <a class="navbar-item" href="../">
                 <img src="http://bulma.io/images/bulma-logo.png" alt="Bulma: a modern CSS framework based on Flexbox">
                 </a>
-                <div class="navbar-burger burger"
+                <div
+                    @click="isActive = !isActive" 
+                    class="navbar-burger burger"
                     aria-label="menu"
                     aria-expanded="false"
                     data-target="navMenu">
@@ -14,9 +16,15 @@
                     <span></span>
                 </div>
             </div>
-        <div id="navMenu" class="navbar-menu">
+        <div
+            @click="isActive = !isActive" 
+            id="navMenu"
+            :class="{'is-active': isActive}"  
+            class="navbar-menu">
             <div class="navbar-end">
-            <div class="navbar-item has-dropdown">
+            <div
+                :class="{'is-active': isActive}" 
+                class="navbar-item has-dropdown">
                 <a class="navbar-link">
                 Menu
                 </a>
@@ -44,7 +52,11 @@
 
 <script>
     export default {
-        
+        data() {
+            return {
+                isActive: false
+            }
+        }
     }
 </script>
 
