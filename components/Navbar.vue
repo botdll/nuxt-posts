@@ -6,7 +6,7 @@
                 <img src="http://bulma.io/images/bulma-logo.png" alt="Bulma: a modern CSS framework based on Flexbox">
                 </a>
                 <div
-                    @click="isActive = !isActive" 
+                    @click="toggleIsActive" 
                     class="navbar-burger burger"
                     aria-label="menu"
                     aria-expanded="false"
@@ -17,7 +17,7 @@
                 </div>
             </div>
         <div
-            @click="isActive = !isActive" 
+            @click="toggleIsActive" 
             id="navMenu"
             :class="{'is-active': isActive}"  
             class="navbar-menu">
@@ -29,19 +29,12 @@
                 Menu
                 </a>
                 <div class="navbar-dropdown">
-                <a class="navbar-item">
-                Dashboard
-                </a>
-                <a class="navbar-item">
-                Profile
-                </a>
-                <a class="navbar-item">
-                Settings
-                </a>
-                <hr class="navbar-divider">
-                <div class="navbar-item">
-                    Logout
-                </div>
+                <nuxt-link to="/" class="navbar-item">
+                Home
+                </nuxt-link>
+                <nuxt-link to="/manage" class="navbar-item">
+                Manage
+                </nuxt-link>
                 </div>
             </div>
             </div>
@@ -55,6 +48,11 @@
         data() {
             return {
                 isActive: false
+            }
+        },
+        methods: {
+            toggleIsActive() {
+                this.isActive = !this.isActive
             }
         }
     }
