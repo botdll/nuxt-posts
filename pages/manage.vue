@@ -85,9 +85,14 @@ export default {
           
       }
   },
+  fetch({ store }) {
+    if (store.getters['post/hasEmptyItems']) {
+      return store.dispatch('post/fetchPosts')
+    }
+  },
   computed: {
       ...mapState({
-          posts: state => state.posts
+          posts: state => state.post.items
       })
   }
 }

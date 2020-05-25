@@ -38,6 +38,7 @@
 <script>
 import Navbar from '@/components/Navbar'
 import PostItem from '@/components/PostItem'
+import { fetchPostsAPI } from '@/store/post'
 
   export default {
     components: {
@@ -53,10 +54,24 @@ import PostItem from '@/components/PostItem'
         }
       }
     },
+    fetch({ store }){
+      if (store.getters['post/hasEmptyItems']) {
+      return store.dispatch('post/fetchPosts')
+    }
+    },
+    // async asyncData() {
+    //   const posts = await fetchPostsAPI()
+    //   return { posts }
+    // },
+    // mounted() {
+    //   this.$store.dispatch('post/fetchPosts')
+    // },
     computed: {
       posts() {
-        return this.$store.state.posts
-      },
+        return this.$store.state.post.items
+      }
+    },
+    methods: {
       isFormValid() {
         console.log('isFormValid has been called')
         if (this.form.title) {
