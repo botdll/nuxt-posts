@@ -6,9 +6,7 @@
         <aside class="column is-2 aside hero">
           <div>
             <div class="compose has-text-centered">
-              <a class="button is-danger is-block is-bold">
-              <span class="compose">Create</span>
-              </a>
+              <Modal />
             </div>
             <div class="main">
             </div>
@@ -73,12 +71,14 @@
 </template>
 
 <script>
-import Navbar from '~/components/Navbar'
+import Navbar from '@/components/Navbar'
+import Modal from '@/components/shared/Modal'
 import { mapState } from 'vuex'
 
 export default {
   components: {
-    Navbar
+    Navbar,
+    Modal
   },
   data() {
       return {
