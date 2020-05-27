@@ -6,7 +6,33 @@
         <aside class="column is-2 aside hero">
           <div>
             <div class="compose has-text-centered">
-              <Modal />
+              <Modal>
+                <template #actionButton>
+                  <a class="button is-danger is-block is-bold">
+                    <span class="compose">Create</span>
+                  </a>
+                </template>
+                <form class="post-form">
+                  <div class="field">
+                    <label class="label">Title</label>
+                    <div class="control">
+                      <input class="input" type="text" placeholder="Awesome Title">
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="label">Subtitle</label>
+                    <div class="control">
+                      <input class="input" type="email" placeholder="Awesome subtitle">
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="label">Content</label>
+                    <div class="control">
+                      <textarea class="textarea" placeholder="Awesome Content"></textarea>
+                    </div>
+                  </div>
+                </form>
+              </Modal>
             </div>
             <div class="main">
             </div>
@@ -110,5 +136,9 @@ export default {
   .card:hover {
     cursor: pointer;
     background-color: #eeeeee;
+  }
+
+  .post-form {
+    text-align: left;
   }
 </style>
