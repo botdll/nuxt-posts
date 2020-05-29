@@ -4,45 +4,14 @@
     <div class="manage-page">
       <div class="columns mail-app">
         <aside class="column is-2 aside hero">
-          <div>
-            <div class="compose has-text-centered">
-              <Modal>
-                <template #actionButton>
-                  <a class="button is-danger is-block is-bold">
-                    <span class="compose">Create</span>
-                  </a>
-                </template>
-                <form class="post-form">
-                  <div class="field">
-                    <label class="label">Title</label>
-                    <div class="control">
-                      <input class="input" type="text" placeholder="Awesome Title">
-                    </div>
-                  </div>
-                  <div class="field">
-                    <label class="label">Subtitle</label>
-                    <div class="control">
-                      <input class="input" type="email" placeholder="Awesome subtitle">
-                    </div>
-                  </div>
-                  <div class="field">
-                    <label class="label">Content</label>
-                    <div class="control">
-                      <textarea class="textarea" placeholder="Awesome Content"></textarea>
-                    </div>
-                  </div>
-                </form>
-              </Modal>
-            </div>
-            <div class="main">
-            </div>
-          </div>
+          <PostCreate />
         </aside>
         <div class="column is-4 messages hero is-fullheight" id="message-feed">
           <div class="inbox-messages" id="inbox-messages">
             <div 
                 v-for="post in posts"
-                :key="post._id"                
+                :key="post._id"
+                @click="activatePost(post)"                
                 class="card">
               <div class="card-content">
                 <div class="msg-header">
@@ -60,20 +29,9 @@
             </div>
           </div>
         </div>
-        <div class="column is-6 message hero is-fullheight is-hidden" id="message-pane">
+        <div class="column is-6 message hero is-fullheight" id="message-pane">
           <div class="box message-preview">
-            <div class="top">
-              <div class="avatar">
-                <img src="https://placehold.it/128x128">
-              </div>
-              <div class="address">
-                <div class="name">John Smith</div>
-                <div class="email">someone@gmail.com</div>
-              </div>
-              <hr>
-              <div class="content">
-              </div>
-            </div>
+            <PostManage :postData="activePost"/>
           </div>
         </div>
       </div>
@@ -98,17 +56,19 @@
 
 <script>
 import Navbar from '@/components/Navbar'
-import Modal from '@/components/shared/Modal'
+import PostCreate from '@/components/PostCreate'
+import PostManage from '@/components/PostManage'
 import { mapState } from 'vuex'
 
 export default {
   components: {
     Navbar,
-    Modal
+    PostCreate,
+    PostManage
   },
   data() {
       return {
-          
+          activePost: {}
       }
   },
   fetch({ store }) {
@@ -120,6 +80,11 @@ export default {
       ...mapState({
           posts: state => state.post.items
       })
+  },
+  methods: {
+    activatePost(post) {
+      this.activePost = post
+    }
   }
 }
 </script>
@@ -136,9 +101,5 @@ export default {
   .card:hover {
     cursor: pointer;
     background-color: #eeeeee;
-  }
-
-  .post-form {
-    text-align: left;
   }
 </style>
