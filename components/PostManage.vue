@@ -38,12 +38,12 @@
         props: ['postData'],
         data() {
             return {
-               post: {...this.postData }
+               post: { ...this.postData }
             }
         },
         watch: {
-           postData(data, oldValue) {
-               this.post = {...data}
+           postData(data) {
+               this.post = { ...data }
            } 
         }       
     }
