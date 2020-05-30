@@ -33,13 +33,18 @@ export const actions = {
           .then((res) => {
             console.log(res)
             commit('addPost', postData)
+            return postData
           })
     },
     updatePost({commit, state}, postData) {
         const index = state.items.findIndex(post => post._id === postData._id)
 
         if (index !== -1) {
-            commit('replacePost', {post: postData, index})
+            return this.$axios.$patch(`/api/posts/${postData._id}`, postData)
+                .then(res => {
+                    commit('replacePost', {post: postData, index})
+                    return postData
+                })            
         }        
     }  
 }
