@@ -1,4 +1,5 @@
-import { INITIAL_DATA } from '@/store/index'
+import Vue from 'vue'
+import INITIAL_DATA from '@/store/initial_data.json'
 
 export function fetchPostsAPI() {
     return new Promise((resolve, reject) => {
@@ -26,8 +27,20 @@ export const actions = {
     },
     createPost({ commit }, postData) {
         postData._id =  Math.random().toString(36).substr(2, 7)
-        postData.createdAt = new Date()
-        commit('addPost', postData) 
+        postData.createdAt = (new Date()).getTime()
+
+        return this.$axios.$post('/api/posts', postData)
+          .then((res) => {
+            console.log(res)
+            commit('addPost', postData)
+          })
+    },
+    updatePost({commit, state}, postData) {
+        const index = state.items.findIndex(post => post._id === postData._id)
+
+        if (index !== -1) {
+            commit('replacePost', {post: postData, index})
+        }        
     }  
 }
 
@@ -37,5 +50,8 @@ export const mutations = {
     },
     addPost(state, post) {
         state.items.push(post)
+    },
+    replacePost(state, {post, index}) {
+        Vue.set(state.items, index, post)
     }
 }
