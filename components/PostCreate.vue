@@ -28,14 +28,18 @@
                 </div>
                 </div>
                 <div class="field">
-                <label class="label">Content</label>
-                <div class="control">
-                    <textarea
-                        v-model="form.content" 
-                        class="textarea" 
-                        placeholder="Awesome Content">
-                    </textarea>
+                    <label class="label">Content</label>
+                    <div class="control">
+                        <textarea
+                            v-model="form.content" 
+                            class="textarea" 
+                            placeholder="Awesome Content">
+                        </textarea>
+                    </div>
                 </div>
+                <div class="markdown">
+                    <label class="label">Content Preview</label>
+                    <div v-html="compiledMarkdown"></div>
                 </div>
             </form>
         </Modal>
@@ -56,6 +60,15 @@ export default {
                 subtitle: '',
                 content: ''
             }
+        }
+    },
+    computed: {
+        compiledMarkdown() {
+            if (process.client) {
+                return marked(this.form.content, {sanitize: true})
+           }
+
+           return ''
         }
     },
     methods: {
