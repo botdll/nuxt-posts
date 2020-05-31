@@ -6,7 +6,7 @@
                 <h5 class="subtitle is-5">{{ subtitle }}</h5>
             </a>
             <div class="post-footer">
-                by Filip Jerga, {{ date | formatDate }}
+                by George T., {{ date | formatDate }}
             </div>
         </div>
         <div class="post-right">
