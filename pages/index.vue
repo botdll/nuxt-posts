@@ -11,26 +11,25 @@
                   <h1>Newest Posts</h1>
                   <hr>
                 </div>
-                <PostItem
-                v-for=" post in posts"
-                :key="post._id" 
-                :title="post.title"
-                :subtitle="post.subtitle"
-                :date="post.createdAt"
-                :isRead="post.isRead"
-                />
+                <div v-if="posts && posts.length > 0">
+                  <PostItem
+                  v-for=" post in posts"
+                  :key="post._id" 
+                  :title="post.title"
+                  :subtitle="post.subtitle"
+                  :date="post.createdAt"
+                  :isRead="post.isRead"
+                  :id="post._id"
+                  />
+                </div>
+                <div v-else>
+                  no posts yet :(
+                </div>
               </div>
-              <!-- end of post -->
             </div>
-            <!-- end of side bar -->
           </div>
         </div>
       </div>
-      <!-- <form>
-        <input type="text" v-model="form.title">
-        <input type="text" v-model="form.subtitle">
-      </form>
-      {{isFormValid}} -->
     </div>
   </div>
 </template>
@@ -56,24 +55,22 @@ import { fetchPostsAPI } from '@/store/post'
     },
     fetch({ store }){
       if (store.getters['post/hasEmptyItems']) {
-      return store.dispatch('post/fetchPosts')
-    }
+        return store.dispatch('post/fetchPosts')
+      }
     },
-    // async asyncData() {
-    //   const posts = await fetchPostsAPI()
-    //   return { posts }
-    // },
-    // mounted() {
-    //   this.$store.dispatch('post/fetchPosts')
-    // },
+    mounted() {
+      this.$store.dispatch('post/getArchivedPosts')
+    },
     computed: {
       posts() {
         return this.$store.state.post.items
+      },
+      archivedPosts() {
+        return this.$store.state.post.archivedItems
       }
     },
     methods: {
       isFormValid() {
-        console.log('isFormValid has been called')
         if (this.form.title) {
           return true
         }

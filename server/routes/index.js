@@ -9,6 +9,8 @@ const initialData = require(filePath)
 
 app.use(bodyParser.json())
 
+app.get('/posts', (req, res) => res.json(initialData.posts))
+
 app.post('/posts', (req, res) => {
   const post = req.body
   initialData.posts.push(post)
@@ -52,7 +54,7 @@ app.patch('/posts/:id', function(req, res) {
           return res.status(422).send(err)
         }
   
-        return res.json('File Sucesfully Updated')
+        return res.json({message: 'File Sucesfully Updated'})
       })
     } else {
       return res.status(422).send({error: 'Post cannot be updated!'})
