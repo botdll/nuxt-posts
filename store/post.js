@@ -12,7 +12,8 @@ export function fetchPostsAPI() {
 export const state = () => {
     return {
         items: [],
-        archivedItems: []
+        archivedItems: [],
+        item: {}
     }
 }
 
@@ -50,7 +51,19 @@ export const actions = {
         localStorage.setItem('archived_posts', JSON.stringify(state.archivedItems))
     },
     fetchPosts({ commit }) {
-        return this.$axios.$get('/api/posts').then(posts => commit('setPosts', posts))
+        return this.$axios.$get('/api/posts')
+            .then(posts => {
+                commit('setPosts', posts)
+                return posts
+            })
+    },
+    fetchPostById({ commit }, postId) {
+        return this.$axios.$get('/api/posts')
+            .then(posts => {
+                const selectedPost = posts.find(p => p._id === postId)
+                commit('setPost', selectedPost)
+                return selectedPost
+            })
     },
     createPost({ commit }, postData) {
         postData._id =  Math.random().toString(36).substr(2, 7)
@@ -99,6 +112,9 @@ export const mutations = {
     },
     setPosts(state, posts) {
         state.items = posts 
+    },
+    setPost(state, post) {
+        state.item = post
     },
     addPost(state, post) {
         state.items.push(post)
